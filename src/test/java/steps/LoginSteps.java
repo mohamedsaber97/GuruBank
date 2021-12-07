@@ -4,6 +4,7 @@ import base.TestBase;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.HomePage;
 import pages.LoginPage;
 
 import java.io.IOException;
@@ -13,6 +14,7 @@ public class LoginSteps extends TestBase {
     }
 
     LoginPage loginPage;
+    HomePage homePage;
 
     @Given("User open login page")
     public void user_open_login_page() {
@@ -28,15 +30,10 @@ public class LoginSteps extends TestBase {
         loginPage.validLogin(userId, password);
     }
 
-    @Then("User see success message and home title")
-    public void userSeeSuccessMessage() {
-        loginPage.successMsg();
-    }
-
     @When("enter invalid {string} and {string}")
     public void enterValidAnd(String userId, String password) throws IOException {
         loginPage = new LoginPage();
-        loginPage.invalidLogin(userId, password);
+        homePage = loginPage.invalidLogin(userId, password);
     }
 
     @Then("User see error message")
